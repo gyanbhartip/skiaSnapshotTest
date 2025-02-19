@@ -81,7 +81,7 @@ function App(): React.JSX.Element {
             throw new Error('base64 image is missing');
           }
           await RNFS.writeFile(
-            `${RNFS.ExternalCachesDirectoryPath}${Date.now().toString()}.png`,
+            `${RNFS.CachesDirectoryPath}${Date.now().toString()}.png`,
             base64ImageData,
             'base64',
           ).catch(error => {
@@ -117,6 +117,7 @@ function App(): React.JSX.Element {
       <View>
         <Header />
         <View
+          collapsable={false}
           ref={snapShotTargetRef}
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
@@ -149,7 +150,7 @@ function App(): React.JSX.Element {
           transparent={true}
           visible={visible}
           onRequestClose={onCloseModal}>
-          <View style={styles.container}>
+          <SafeAreaView style={styles.container}>
             <View style={styles.header}>
               <Text style={{fontSize: 16, fontWeight: 600}}>
                 Customer Signature
@@ -170,7 +171,7 @@ function App(): React.JSX.Element {
               <Button onPress={onRemove} title={'Clear'} />
               <Button onPress={onSubmit} title={'Submit'} />
             </View>
-          </View>
+          </SafeAreaView>
         </Modal>
       </View>
     </SafeAreaView>
